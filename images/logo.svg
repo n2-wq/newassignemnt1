@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 168" width="60" height="84" role="img" aria-label="BabyFactory logo: a baby bottle">
+  <title>BabyFactory logo</title>
+
+  <defs>
+    <linearGradient id="bottle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A8DADC"/>
+      <stop offset="1" stop-color="#83BCC1"/>
+    </linearGradient>
+    <linearGradient id="milk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#FFF8F0"/>
+    </linearGradient>
+    <linearGradient id="nipple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B35A4B"/>
+      <stop offset="1" stop-color="#8F3A2E"/>
+    </linearGradient>
+    <linearGradient id="collar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6D6875"/>
+      <stop offset="1" stop-color="#57525E"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="60" cy="160" rx="36" ry="6" fill="#4A4A4A" opacity="0.10"/>
+
+  <path d="M46 26 L46 15 C46 3 74 3 74 15 L74 26 Z" fill="url(#nipple)"/>
+
+  <rect x="38" y="26" width="44" height="16" rx="6" fill="url(#collar)"/>
+
+  <path d="M32 138 L32 84 C32 62 44 56 48 56 L48 42 L72 42 L72 56 C76 56 88 62 88 84 L88 138 C88 152 76 156 60 156 C44 156 32 152 32 138 Z" fill="url(#bottle)"/>
+
+  <path d="M36 98 L36 128 C36 140 44 146 60 146 C76 146 84 140 84 128 L84 98 Z" fill="url(#milk)"/>
+  <ellipse cx="60" cy="98" rx="24" ry="4" fill="#F3E2CF" opacity="0.55"/>
+
+  <rect x="39" y="88" width="8" height="46" rx="4" fill="#FFFFFF" opacity="0.35"/>
+
+  <line x1="46" y1="88" x2="74" y2="88" stroke="#FFF8F0" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <line x1="46" y1="93" x2="74" y2="93" stroke="#FFF8F0" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+
+  <path d="M60 136 C57 128 48 123 48 114 C48 106 53 102 60 108 C67 102 72 106 72 114 C72 123 63 128 60 136 Z" fill="#8F3A2E"/>
+</svg>

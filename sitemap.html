@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Site map for the BabyFactory website: every page, every product category and the stores we compared.">
+    <title>BabyFactory - Site Map | Full Page Directory</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background-color: #8F3A2E;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            z-index: 1000;
+            font-weight: bold;
+            border-radius: 0 0 5px 0;
+        }
+        .skip-link:focus { top: 0; }
+        body { font-family: Arial, sans-serif; background-color: #FFF8F0; color: #4A4A4A; line-height: 1.6; }
+        .container { max-width: 1200px; min-width: 768px; margin: 0 auto; background-color: #FFF8F0; }
+        .banner { background-color: #FFF8F0; padding: 20px; text-align: center; }
+        .banner h1 { color: #6D6875; font-size: 32px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .banner h1 .logo { height: 56px; width: auto; }
+        .banner p { color: #6D6875; font-size: 14px; margin-top: 5px; }
+        nav { background-color: #A8DADC; text-align: center; padding: 12px; position: sticky; top: 0; z-index: 100; }
+        nav ul { list-style: none; }
+        nav ul li { display: inline; margin: 0 15px; }
+        nav ul li a { color: #4A4A4A; text-decoration: none; font-size: 15px; }
+        nav ul li a:hover { color: #8F3A2E; }
+        .breadcrumb { background-color: #FFF8F0; padding: 12px 30px; font-size: 14px; color: #6D6875; }
+        .breadcrumb a { color: #8F3A2E; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { font-weight: bold; }
+        .hero { background-color: #FFE5D9; text-align: center; padding: 60px 20px; }
+        .hero h2 { font-size: 32px; color: #6D6875; font-weight: bold; margin-bottom: 10px; }
+        .hero p { font-size: 18px; color: #6D6875; }
+        .content { padding: 40px 30px; max-width: 900px; margin: 0 auto; }
+        .content > h2 { color: #6D6875; font-size: 26px; margin-bottom: 25px; text-align: center; }
+        /* Three columns: main pages, categories, customer resources */
+        .sitemap-sections { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 25px; }
+        .sitemap-section {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .sitemap-section h3 {
+            color: #6D6875;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #A8DADC;
+        }
+        .sitemap-section ul { list-style: none; }
+        .sitemap-section ul li { margin-bottom: 10px; padding-left: 20px; position: relative; }
+        .sitemap-section ul li::before {
+            content: "▸";
+            color: #8F3A2E;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .sitemap-section ul li a { color: #4A4A4A; text-decoration: none; font-size: 15px; }
+        .sitemap-section ul li a:hover { color: #8F3A2E; text-decoration: underline; }
+        .sitemap-section ul li ul { margin-left: 15px; margin-top: 8px; }
+        .sitemap-section ul li ul li { margin-bottom: 5px; padding-left: 15px; }
+        .sitemap-section ul li ul li::before { content: "·"; color: #A8DADC; }
+        .external-resources {
+            background-color: #FFE5D9;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .external-resources h3 { color: #6D6875; font-size: 18px; margin-bottom: 15px; }
+        .external-resources a {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 8px 20px;
+            background-color: white;
+            color: #4A4A4A;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .external-resources a:hover { background-color: #A8DADC; }
+        .store-info { background-color: #A8DADC; padding: 25px; text-align: center; color: #4A4A4A; font-size: 15px; line-height: 2; }
+        footer { background-color: #4A4A4A; color: white; text-align: center; padding: 20px; font-size: 12px; }
+        footer a { color: #A8DADC; text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 768px) {
+            .container { min-width: 100%; }
+            .banner h1 { font-size: 24px; }
+            .banner h1 .logo { height: 44px; }
+            nav ul li { display: block; margin: 5px 0; }
+            nav ul li a { font-size: 14px; }
+            .breadcrumb { padding: 10px 15px; font-size: 13px; }
+            .hero { padding: 40px 15px; }
+            .hero h2 { font-size: 24px; }
+            .hero p { font-size: 15px; }
+            .content { padding: 25px 15px; }
+            .sitemap-sections { flex-direction: column; }
+            .sitemap-section { min-width: 100%; }
+            .external-resources { padding: 20px 15px; }
+            .external-resources a { display: block; margin: 5px auto; width: 80%; }
+            footer p { font-size: 11px; }
+            footer a { display: inline-block; margin: 4px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="banner">
+        <h1><img src="images/logo.svg" alt="BabyFactory logo" class="logo">BabyFactory</h1>
+        <p>Premium Baby Clothing, Toys & Accessories</p>
+    </div>
+
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="clothing.html">Clothing</a></li>
+            <li><a href="toys.html">Toys</a></li>
+            <li><a href="accessories.html">Accessories</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="sitemap.html" class="active">Site Map</a></li>
+        </ul>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        &rsaquo;
+        <span>Site Map</span>
+    </div>
+
+    <main role="main" id="main-content">
+        <div class="hero">
+            <h2>Site Map</h2>
+            <p>Complete directory of all pages on BabyFactory</p>
+        </div>
+
+        <div class="content">
+            <h2>Explore Our Website</h2>
+
+            <div class="sitemap-sections">
+                <div class="sitemap-section">
+                    <h3>Main Pages</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="sitemap.html">Site Map</a></li>
+                    </ul>
+                </div>
+
+                <div class="sitemap-section">
+                    <h3>Product Categories</h3>
+                    <ul>
+                        <li><a href="clothing.html">Clothing</a>
+                            <ul>
+                                <li><a href="product.html?id=romper">Cotton Baby Romper</a></li>
+                                <li><a href="product.html?id=bodysuit">One Two Three Bodysuit</a></li>
+                                <li><a href="product.html?id=overalls">Denim Overalls &amp; Tee Set</a></li>
+                                <li><a href="product.html?id=hooded">Bear-Ear Hooded Sweatsuit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="toys.html">Toys</a>
+                            <ul>
+                                <li><a href="product.html?id=bunny">Plush Bunny Toy</a></li>
+                                <li><a href="product.html?id=teether">Silicone Teether Set</a></li>
+                                <li><a href="product.html?id=sorter">Shape Sorter &amp; Rattle Set</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="accessories.html">Accessories</a>
+                            <ul>
+                                <li><a href="product.html?id=bow-headbands">Knit Bow Headband Set</a></li>
+                                <li><a href="product.html?id=fabric-bows">Fabric Bow Headband Set</a></li>
+                                <li><a href="product.html?id=hair-ties">Handmade Hair Tie Set</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sitemap-section">
+                    <h3>Customer Resources</h3>
+                    <ul>
+                        <li><a href="contact.html#message-form">Send a Message</a></li>
+                        <li><a href="about.html#mission">Our Mission</a></li>
+                        <li><a href="about.html#team">Meet the Team</a></li>
+                        <li><a href="about.html#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="external-resources">
+                <h3>Similar Stores We Reference</h3>
+                <a href="https://babylovenz.com/" target="_blank" rel="noopener noreferrer">Babylove NZ</a>
+                <a href="https://bumbelou.com/" target="_blank" rel="noopener noreferrer">Bumbelou</a>
+                <a href="https://eversimplicity.com/" target="_blank" rel="noopener noreferrer">Ever Simplicity</a>
+            </div>
+        </div>
+    </main>
+
+    <div class="store-info">
+        <p>📍 Deer Park Mall &nbsp;|&nbsp; 🕐 Mon-Sat: 9am - 6pm | Sun: 10am - 5pm &nbsp;|&nbsp; 📞 06-123-4567 &nbsp;|&nbsp; ✉️ info@babyfactory.co.nz</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 BabyFactory. All Rights Reserved. | Last updated: September 2026</p>
+        <p style="margin-top:8px;">
+            <a href="https://www.facebook.com/babyfactory" target="_blank" rel="noopener noreferrer">Facebook</a> |
+            <a href="https://www.instagram.com/babyfactory" target="_blank" rel="noopener noreferrer">Instagram</a> |
+            <a href="about.html#privacy">Privacy Policy</a> |
+            <a href="sitemap.html">Site Map</a>
+        </p>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hair accessories and gifts at BabyFactory: headbands, clips and hair ties from $11.99.">
+    <title>BabyFactory - Accessories | Baby Shoes, Hats & More</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background-color: #8F3A2E;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            z-index: 1000;
+            font-weight: bold;
+            border-radius: 0 0 5px 0;
+        }
+        .skip-link:focus { top: 0; }
+        body { font-family: Arial, sans-serif; background-color: #FFF8F0; color: #4A4A4A; line-height: 1.6; }
+        .container { max-width: 1200px; min-width: 768px; margin: 0 auto; background-color: #FFF8F0; }
+        .banner { background-color: #FFF8F0; padding: 20px; text-align: center; }
+        .banner h1 { color: #6D6875; font-size: 32px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .banner h1 .logo { height: 56px; width: auto; }
+        .banner p { color: #6D6875; font-size: 14px; margin-top: 5px; }
+        nav { background-color: #A8DADC; text-align: center; padding: 12px; position: sticky; top: 0; z-index: 100; }
+        nav ul { list-style: none; }
+        nav ul li { display: inline; margin: 0 15px; }
+        nav ul li a { color: #4A4A4A; text-decoration: none; font-size: 15px; }
+        nav ul li a:hover { color: #8F3A2E; }
+        .active { font-weight: bold !important; color: #8F3A2E !important; }
+        .breadcrumb { background-color: #FFF8F0; padding: 12px 30px; font-size: 14px; color: #6D6875; }
+        .breadcrumb a { color: #8F3A2E; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { font-weight: bold; }
+        .hero { background-color: #FFE5D9; text-align: center; padding: 60px 20px; }
+        .hero h2 { font-size: 32px; color: #6D6875; font-weight: bold; margin-bottom: 10px; }
+        .hero p { font-size: 18px; color: #6D6875; }
+        .section-title { text-align: center; padding: 40px 20px 10px; color: #6D6875; font-size: 26px; font-weight: bold; }
+        .section-subtitle { text-align: center; padding: 0 20px 25px; color: #6D6875; font-size: 15px; }
+        .products { display: flex; justify-content: center; flex-wrap: wrap; padding: 20px 30px 40px; }
+        .product-card {
+            width: 220px;
+            text-align: center;
+            margin: 15px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+        .product-card h3 { font-size: 16px; color: #6D6875; margin-bottom: 5px; }
+        .price { color: #8F3A2E; font-weight: bold; font-size: 18px; }
+        .view-details {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 5px 15px;
+            background-color: #A8DADC;
+            color: #4A4A4A;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        /* Gift guide: for the grandparents and gift buyers */
+        .gift-guide { background-color: #FFE5D9; padding: 50px 30px; text-align: center; }
+        .gift-guide h2 { color: #6D6875; font-size: 24px; margin-bottom: 20px; }
+        .gift-grid { display: flex; justify-content: center; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
+        .gift-item {
+            width: 250px;
+            margin: 15px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .gift-item .icon { font-size: 35px; margin-bottom: 10px; }
+        .gift-item h3 { color: #6D6875; font-size: 16px; margin-bottom: 8px; }
+        .gift-item p { font-size: 13px; color: #4A4A4A; }
+        .store-info { background-color: #A8DADC; padding: 25px; text-align: center; color: #4A4A4A; font-size: 15px; line-height: 2; }
+        footer { background-color: #4A4A4A; color: white; text-align: center; padding: 20px; font-size: 12px; }
+        footer a { color: #A8DADC; text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 768px) {
+            .container { min-width: 100%; }
+            .banner h1 { font-size: 24px; }
+            .banner h1 .logo { height: 44px; }
+            nav ul li { display: block; margin: 5px 0; }
+            nav ul li a { font-size: 14px; }
+            .breadcrumb { padding: 10px 15px; font-size: 13px; }
+            .hero { padding: 40px 15px; }
+            .hero h2 { font-size: 24px; }
+            .hero p { font-size: 15px; }
+            .section-title { font-size: 22px; padding: 30px 15px 5px; }
+            .section-subtitle { font-size: 14px; padding: 0 15px 20px; }
+            .product-card { width: 90%; margin: 10px auto; }
+            .gift-item { width: 90%; margin: 10px auto; }
+            .gift-guide { padding: 30px 15px; }
+            footer p { font-size: 11px; }
+            footer a { display: inline-block; margin: 4px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="banner">
+        <h1><img src="images/logo.svg" alt="BabyFactory logo" class="logo">BabyFactory</h1>
+        <p>Premium Baby Clothing, Toys & Accessories</p>
+    </div>
+
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="clothing.html">Clothing</a></li>
+            <li><a href="toys.html">Toys</a></li>
+            <li><a href="accessories.html" class="active">Accessories</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li> <a href = "sitemap.html" > Site Map </a> </li>
+        </ul>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        &rsaquo;
+        <span>Accessories</span>
+    </div>
+
+    <main role="main" id="main-content">
+        <div class="hero">
+            <h2>Baby Accessories</h2>
+            <p>Adorable accessories to complete the look</p>
+        </div>
+
+        <h2 class="section-title">Our Accessories Collection</h2>
+        <p class="section-subtitle">Click any product to view details and purchase</p>
+        <div class="products">
+            <a href="product.html?id=bow-headbands" class="product-card">
+                <img class="product-img" src="images/acc1.jpg" alt="Knit Bow Headband Set">
+                <h3>Knit Bow Headband Set</h3>
+                <p class="price">$19.99</p>
+                <span class="view-details">View Details</span>
+            </a>
+            <a href="product.html?id=fabric-bows" class="product-card">
+                <img class="product-img" src="images/acc2.jpg" alt="Fabric Bow Headband Set">
+                <h3>Fabric Bow Headband Set</h3>
+                <p class="price">$16.99</p>
+                <span class="view-details">View Details</span>
+            </a>
+            <a href="product.html?id=mini-clips" class="product-card">
+                <img class="product-img" src="images/acc3.jpg" alt="Mini Bow Hair Clip Set">
+                <h3>Mini Bow Hair Clip Set</h3>
+                <p class="price">$12.99</p>
+                <span class="view-details">View Details</span>
+            </a>
+            <a href="product.html?id=hair-kit" class="product-card">
+                <img class="product-img" src="images/acc4.jpg" alt="Baby Hair Accessory Kit">
+                <h3>Baby Hair Accessory Kit</h3>
+                <p class="price">$21.99</p>
+                <span class="view-details">View Details</span>
+            </a>
+            <a href="product.html?id=princess-clips" class="product-card">
+                <img class="product-img" src="images/acc5.jpg" alt="Princess Hair Clip Set">
+                <h3>Princess Hair Clip Set</h3>
+                <p class="price">$14.99</p>
+                <span class="view-details">View Details</span>
+            </a>
+            <a href="product.html?id=blue-clips" class="product-card">
+                <img class="product-img" src="images/acc6.jpg" alt="Blue Flower Hair Clip Set">
+                <h3>Blue Flower Hair Clip Set</h3>
+                <p class="price">$13.99</p>
+                <span class="view-details">View Details</span>
+            </a>
+            <a href="product.html?id=pastel-clips" class="product-card">
+                <img class="product-img" src="images/acc7.jpg" alt="Pastel Hair Clip Collection">
+                <h3>Pastel Hair Clip Collection</h3>
+                <p class="price">$17.99</p>
+                <span class="view-details">View Details</span>
+            </a>
+            <a href="product.html?id=hair-ties" class="product-card">
+                <img class="product-img" src="images/acc8.jpg" alt="Handmade Hair Tie Set">
+                <h3>Handmade Hair Tie Set</h3>
+                <p class="price">$11.99</p>
+                <span class="view-details">View Details</span>
+            </a>
+        </div>
+        <div class="gift-guide">
+            <h2>Baby Gift Guide</h2>
+            <div class="gift-grid">
+                <div class="gift-item">
+                    <div class="icon">🎁</div>
+                    <h3>Newborn Gift Set</h3>
+                    <p>Perfect for baby showers - blankets, socks, and beanies starting at $40.</p>
+                </div>
+                <div class="gift-item">
+                    <div class="icon">🎂</div>
+                    <h3>First Birthday</h3>
+                    <p>Toys and accessories for toddlers celebrating their first milestone.</p>
+                </div>
+                <div class="gift-item">
+                    <div class="icon">💝</div>
+                    <h3>Gift Cards</h3>
+                    <p>Can't decide? Our gift cards start from $25 and never expire.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="store-info">
+        <p>📍 Deer Park Mall &nbsp;|&nbsp; 🕐 Mon-Sat: 9am - 6pm | Sun: 10am - 5pm &nbsp;|&nbsp; 📞 06-123-4567 &nbsp;|&nbsp; ✉️ info@babyfactory.co.nz</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 BabyFactory. All Rights Reserved. | Last updated: September 2026</p>
+        <p style="margin-top:8px;">
+            <a href="https://www.facebook.com/babyfactory" target="_blank" rel="noopener noreferrer">Facebook</a> |
+            <a href="https://www.instagram.com/babyfactory" target="_blank" rel="noopener noreferrer">Instagram</a> |
+            <a href="about.html#privacy">Privacy Policy</a>
+             <a href = "sitemap.html" > Site Map </a>
+        </p>
+    </footer>
+</div>
+</body>
+</html>

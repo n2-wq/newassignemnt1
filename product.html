@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BabyFactory product details: photo, price, sizes and specifications for each item in the shop.">
+    <title>BabyFactory - Product Details</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background-color: #8F3A2E;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            z-index: 1000;
+            font-weight: bold;
+            border-radius: 0 0 5px 0;
+        }
+        .skip-link:focus { top: 0; }
+        body { font-family:Arial,sans-serif; background-color:#FFF8F0; color:#4A4A4A; line-height:1.6; }
+        .container { max-width:1200px; min-width:768px; margin:0 auto; background-color:#FFF8F0; }
+        .banner { background-color:#FFF8F0; padding:20px; text-align:center; }
+        .banner h1 { color:#6D6875; font-size:32px; font-weight:bold; display:flex; align-items:center; justify-content:center; gap:12px; }
+        .banner h1 .logo { height:56px; width:auto; }
+        .banner p { color:#6D6875; font-size:14px; margin-top:5px; }
+        nav { background-color:#A8DADC; text-align:center; padding:12px; position:sticky; top:0; z-index:100; }
+        nav ul { list-style:none; }
+        nav ul li { display:inline; margin:0 15px; }
+        nav ul li a { color:#4A4A4A; text-decoration:none; font-size:15px; }
+        nav ul li a:hover { color:#8F3A2E; }
+        .active { font-weight:bold !important; color:#8F3A2E !important; }
+        .breadcrumb { background-color:#FFF8F0; padding:12px 30px; font-size:14px; color:#6D6875; }
+        .breadcrumb a { color:#8F3A2E; text-decoration:none; }
+        .breadcrumb a:hover { text-decoration:underline; }
+        .breadcrumb span { font-weight:bold; }
+        /* Detail view: image and buy panel side by side, stacked on phones */
+        .product-detail { display:flex; flex-wrap:wrap; padding:30px; gap:40px; }
+        .product-detail-img { flex:1; min-width:350px; }
+        .product-detail-img img { width:100%; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.1); }
+        .product-detail-info { flex:1; min-width:350px; }
+        .product-detail-info h2 { color:#6D6875; font-size:28px; margin-bottom:10px; }
+        .product-detail-info .price { color:#8F3A2E; font-size:32px; font-weight:bold; margin-bottom:15px; }
+        .product-detail-info .description { font-size:15px; color:#4A4A4A; margin-bottom:20px; line-height:1.8; }
+        .product-specs { width:100%; margin-bottom:20px; border-collapse:collapse; }
+        .product-specs td { padding:8px 0; border-bottom:1px solid #eee; font-size:14px; }
+        .product-specs td:first-child { color:#6D6875; font-weight:bold; width:120px; }
+        .size-selector { margin-bottom:20px; border:0; }
+        .size-selector legend { color:#6D6875; font-weight:bold; margin-bottom:8px; }
+        .size-options { display:flex; gap:10px; flex-wrap:wrap; }
+        .size-option { padding:8px 20px; border:2px solid #A8DADC; border-radius:8px; cursor:pointer; font-size:14px; background-color:white; }
+        .size-option:hover { border-color:#8F3A2E; }
+        .size-option.selected { border-color:#8F3A2E; background-color:#FFF1EC; font-weight:bold; }
+        .quantity-selector { margin-bottom:25px; }
+        .quantity-selector label { display:block; color:#6D6875; font-weight:bold; margin-bottom:8px; }
+        .quantity-controls { display:flex; align-items:center; gap:15px; }
+        .qty-btn { width:36px; height:36px; border:none; border-radius:5px; background-color:#A8DADC; color:#4A4A4A; font-size:18px; font-weight:bold; cursor:pointer; }
+        .qty-btn:hover { background-color:#8F3A2E; color:white; }
+        .qty-value { font-size:18px; font-weight:bold; color:#6D6875; }
+        .buy-buttons { display:flex; gap:15px; margin-bottom:30px; }
+        .btn-add-cart { flex:1; background-color:#A8DADC; color:#4A4A4A; border:none; padding:15px; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer; }
+        .btn-add-cart:hover { background-color:#8fcace; }
+        .btn-buy-now { flex:1; background-color:#8F3A2E; color:white; border:none; padding:15px; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer; }
+        .btn-buy-now:hover { background-color:#6F2D24; }
+        .trust-badges { display:flex; justify-content:space-around; flex-wrap:wrap; gap:10px; padding:20px 0; border-top:1px solid #eee; }
+        .trust-badge { text-align:center; font-size:13px; color:#6D6875; }
+        .trust-badge .icon { font-size:25px; margin-bottom:5px; }
+        .related { padding:30px; }
+        .related h2 { text-align:center; color:#6D6875; font-size:24px; margin-bottom:25px; }
+        .related-grid { display:flex; justify-content:center; flex-wrap:wrap; gap:15px; }
+        .related-card { width:180px; text-align:center; background-color:white; padding:12px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-decoration:none; color:inherit; display:block; transition:transform 0.2s; }
+        .related-card:hover { transform:translateY(-5px); }
+        .related-card img { width:100%; height:130px; object-fit:cover; border-radius:8px; margin-bottom:8px; }
+        .related-card h3 { font-size:14px; color:#6D6875; margin-bottom:3px; }
+        .related-card .price { color:#8F3A2E; font-weight:bold; font-size:15px; }
+        .store-info { background-color:#A8DADC; padding:25px; text-align:center; color:#4A4A4A; font-size:15px; line-height:2; }
+        footer { background-color:#4A4A4A; color:white; text-align:center; padding:20px; font-size:12px; }
+        footer a { color:#A8DADC; text-decoration:none; margin:0 8px; }
+        footer a:hover { text-decoration:underline; }
+        @media (max-width: 768px) {
+            .container { min-width: 100%; }
+            .banner h1 { font-size: 24px; }
+            .banner h1 .logo { height: 44px; }
+            nav ul li { display: block; margin: 5px 0; }
+            nav ul li a { font-size: 14px; }
+            .breadcrumb { padding: 10px 15px; font-size: 13px; }
+            .product-detail { flex-direction: column; padding: 20px 15px; gap: 20px; }
+            .product-detail-img, .product-detail-info { min-width: 100%; }
+            .product-detail-info h2 { font-size: 22px; }
+            .product-detail-info .price { font-size: 24px; }
+            .buy-buttons { flex-direction: column; }
+            .related-card { width: 90%; margin: 10px auto; }
+            .related { padding: 20px 15px; }
+            footer p { font-size: 11px; }
+            footer a { display: inline-block; margin: 4px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="banner">
+        <h1><img src="images/logo.svg" alt="BabyFactory logo" class="logo">BabyFactory</h1>
+        <p>Premium Baby Clothing, Toys & Accessories</p>
+    </div>
+
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="clothing.html">Clothing</a></li>
+            <li><a href="toys.html">Toys</a></li>
+            <li><a href="accessories.html">Accessories</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li> <a href = "sitemap.html" > Site Map </a> </li>
+        </ul>
+    </nav>
+
+    <div class="breadcrumb" id="breadcrumb">
+        <a href="index.html">Home</a>
+        &rsaquo;
+        <span id="bc-category">Category</span>
+        &rsaquo;
+        <span id="bc-name">Product</span>
+    </div>
+
+    <main role="main" id="main-content">
+        <div class="product-detail">
+            <div class="product-detail-img">
+                <img id="product-image" src="" alt="">
+            </div>
+            <div class="product-detail-info">
+                <h2 id="product-name">Product Name</h2>
+                <p class="price" id="product-price">$0.00</p>
+                <p class="description" id="product-description">Product description.</p>
+
+                <table class="product-specs" id="product-specs"></table>
+
+                <fieldset class="size-selector">
+                    <legend>Select Size</legend>
+                    <div class="size-options" id="size-options"></div>
+                </fieldset>
+
+                <div class="quantity-selector">
+                    <label>Quantity</label>
+                    <div class="quantity-controls">
+                        <button class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease quantity">-</button>
+                        <span class="qty-value" id="qty">1</span>
+                        <button class="qty-btn" onclick="changeQty(1)" aria-label="Increase quantity">+</button>
+                    </div>
+                </div>
+
+                <div class="buy-buttons">
+                    <button class="btn-add-cart" onclick="alert('Added to cart!')">Add to Cart</button>
+                    <button class="btn-buy-now" onclick="alert('Redirecting to checkout...')">Buy Now</button>
+                </div>
+
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <div class="icon">🚚</div>
+                        Free Delivery over $50
+                    </div>
+                    <div class="trust-badge">
+                        <div class="icon">↩️</div>
+                        30-Day Returns
+                    </div>
+                    <div class="trust-badge">
+                        <div class="icon">🔒</div>
+                        Secure Payment
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="related">
+            <h2>You May Also Like</h2>
+            <div class="related-grid" id="related-grid"></div>
+        </div>
+    </main>
+
+    <div class="store-info">
+        <p>📍 Deer Park Mall &nbsp;|&nbsp; 🕐 Mon-Sat: 9am - 6pm | Sun: 10am - 5pm &nbsp;|&nbsp; 📞 06-123-4567 &nbsp;|&nbsp; ✉️ info@babyfactory.co.nz</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 BabyFactory. All Rights Reserved. | Last updated: September 2026</p>
+        <p style="margin-top:8px;">
+            <a href="https://www.facebook.com/babyfactory" target="_blank" rel="noopener noreferrer">Facebook</a> |
+            <a href="https://www.instagram.com/babyfactory" target="_blank" rel="noopener noreferrer">Instagram</a> |
+            <a href="about.html#privacy">Privacy Policy</a>
+             <a href = "sitemap.html" > Site Map </a>
+        </p>
+    </footer>
+</div>
+
+<script>
+    // Product catalogue used by the category cards, the detail page and the
+    // "You May Also Like" row, so a price or photo only has to be changed once.
+    // product data
+    var products = {
+        romper:    { name:"Cotton Baby Romper", price:"$29.99", img:"images/romper.jpg", cat:"Clothing", catLink:"clothing.html",
+                     desc:"A soft beige long-sleeve romper with a small bear motif and easy snap fastenings.",
+                     specs:[["Material","100% Organic Cotton"],["Age Range","0-24 months"],["Color","Beige"],["Care","Machine Wash Cold"]],
+                     sizes:["0-3M","3-6M","6-12M","12-18M","18-24M"] },
+        bodysuit:  { name:"One Two Three Bodysuit", price:"$24.99", img:"images/clothes4.jpg", cat:"Clothing", catLink:"clothing.html",
+                     desc:"An ivory cotton bodysuit with a simple one-two-three print and red snap fastenings.",
+                     specs:[["Material","100% Cotton"],["Age Range","0-24 months"],["Print","Numbers and Clouds"],["Care","Machine Wash Cold"]],
+                     sizes:["0-3M","3-6M","6-12M","12-18M","18-24M"] },
+        overalls:  { name:"Denim Overalls & Tee Set", price:"$42.99", img:"images/clothes5.jpg", cat:"Clothing", catLink:"clothing.html",
+                     desc:"A two-piece set with soft denim overalls and a long-sleeve yellow tee for everyday wear.",
+                     specs:[["Material","Cotton Denim + Cotton"],["Age Range","12-24 months"],["Includes","Overalls and Tee"],["Care","Machine Wash"]],
+                     sizes:["12-18M","18-24M"] },
+        hooded:    { name:"Bear-Ear Hooded Sweatsuit", price:"$39.99", img:"images/clothes8.jpg", cat:"Clothing", catLink:"clothing.html",
+                     desc:"A cosy hooded sweatsuit with bear-ear details and a warm fleece lining.",
+                     specs:[["Material","Fleece Blend"],["Age Range","6-24 months"],["Feature","Bear-Ear Hood"],["Care","Machine Wash"]],
+                     sizes:["6-12M","12-18M","18-24M"] },
+
+        bunny:     { name:"Plush Bunny Toy", price:"$24.99", img:"images/bunny.jpg", cat:"Toys", catLink:"toys.html",
+                     desc:"A soft grey plush bunny with long ears, designed for cuddling and comfort.",
+                     specs:[["Material","Plush Polyester"],["Age Range","0+ months"],["Height","28cm"],["Care","Surface Wash"]],
+                     sizes:[] },
+        teether:   { name:"Silicone Teether Set", price:"$19.99", img:"images/teether.jpg", cat:"Toys", catLink:"toys.html",
+                     desc:"A set of two food-grade silicone teethers with easy-grip shapes for sore gums.",
+                     specs:[["Material","Food-Grade Silicone"],["Set of","2 pieces"],["BPA-Free","Yes"],["Care","Dishwasher Safe"]],
+                     sizes:[] },
+        sorter:    { name:"Shape Sorter & Rattle Set", price:"$22.99", img:"images/toy7.jpg", cat:"Toys", catLink:"toys.html",
+                     desc:"A play set combining a shape sorter, stacking rings, a rattle and a soft teddy.",
+                     specs:[["Material","Wood + Fabric"],["Age Range","12+ months"],["Includes","4 play pieces"],["Care","Wipe Clean"]],
+                     sizes:[] },
+
+        "bow-headbands": { name:"Knit Bow Headband Set", price:"$19.99", img:"images/acc1.jpg", cat:"Accessories", catLink:"accessories.html",
+                     desc:"A set of five neutral knitted bow headbands for babies and toddlers.",
+                     specs:[["Material","Knit Fabric"],["Set of","5 headbands"],["Age Range","0-24 months"],["Care","Hand Wash"]],
+                     sizes:[] },
+        "fabric-bows": { name:"Fabric Bow Headband Set", price:"$16.99", img:"images/acc2.jpg", cat:"Accessories", catLink:"accessories.html",
+                     desc:"Soft fabric bow headbands in a range of colours for everyday outfits.",
+                     specs:[["Material","Soft Fabric"],["Set of","8 headbands"],["Age Range","0-24 months"],["Care","Hand Wash"]],
+                     sizes:[] },
+        "mini-clips": { name:"Mini Bow Hair Clip Set", price:"$12.99", img:"images/acc3.jpg", cat:"Accessories", catLink:"accessories.html",
+                     desc:"A colourful set of mini bow clips arranged on a display card.",
+                     specs:[["Material","Fabric + Metal"],["Set of","20 clips"],["Age Range","6+ months"],["Care","Wipe Clean"]],
+                     sizes:[] },
+        "hair-kit": { name:"Baby Hair Accessory Kit", price:"$21.99", img:"images/acc4.jpg", cat:"Accessories", catLink:"accessories.html",
+                     desc:"A mixed hair accessory kit with clips, ties and snap clips in bright colours.",
+                     specs:[["Material","Fabric + Metal"],["Includes","Clips, ties and snap clips"],["Age Range","6+ months"],["Care","Wipe Clean"]],
+                     sizes:[] },
+        "princess-clips": { name:"Princess Hair Clip Set", price:"$14.99", img:"images/acc5.jpg", cat:"Accessories", catLink:"accessories.html",
+                     desc:"A set of decorated princess-themed hair clips in mixed shapes and patterns.",
+                     specs:[["Material","Fabric + Metal"],["Set of","12 clips"],["Theme","Princess"],["Care","Wipe Clean"]],
+                     sizes:[] },
+        "blue-clips": { name:"Blue Flower Hair Clip Set", price:"$13.99", img:"images/acc6.jpg", cat:"Accessories", catLink:"accessories.html",
+                     desc:"A blue-toned set of flower and bow hair clips with soft pom-pom details.",
+                     specs:[["Material","Fabric + Metal"],["Set of","6 clips"],["Colour","Blue"],["Care","Wipe Clean"]],
+                     sizes:[] },
+        "pastel-clips": { name:"Pastel Hair Clip Collection", price:"$17.99", img:"images/acc7.jpg", cat:"Accessories", catLink:"accessories.html",
+                     desc:"A large collection of pastel hair clips in flower, star, heart and bow shapes.",
+                     specs:[["Material","Fabric + Metal"],["Set of","30 clips"],["Colour","Pastel Mix"],["Care","Wipe Clean"]],
+                     sizes:[] },
+        "hair-ties": { name:"Handmade Hair Tie Set", price:"$11.99", img:"images/acc8.jpg", cat:"Accessories", catLink:"accessories.html",
+                     desc:"Handmade decorative hair ties supplied on individual display cards.",
+                     specs:[["Material","Elastic + Fabric"],["Set of","8 ties"],["Colour","Mixed"],["Care","Hand Wash"]],
+                     sizes:[] }
+    };
+
+    // read the id from the URL
+    var params = new URLSearchParams(window.location.search);
+    var productId = params.get("id") || "romper";
+
+    var product = products[productId] || products["romper"];
+
+    document.title = "BabyFactory - " + product.name + " | Product Details";
+
+    document.getElementById("bc-category").innerHTML = '<a href="' + product.catLink + '">' + product.cat + '</a>';
+    document.getElementById("bc-name").textContent = product.name;
+
+    document.getElementById("product-image").src = product.img;
+    document.getElementById("product-image").alt = product.name;
+    document.getElementById("product-name").textContent = product.name;
+    document.getElementById("product-price").textContent = product.price;
+    document.getElementById("product-description").textContent = product.desc;
+
+    var specsHtml = "";
+    for (var i = 0; i < product.specs.length; i++) {
+        specsHtml += "<tr><td>" + product.specs[i][0] + "</td><td>" + product.specs[i][1] + "</td></tr>";
+    }
+    document.getElementById("product-specs").innerHTML = specsHtml;
+
+    var sizesHtml = "";
+    if (product.sizes.length > 0) {
+        for (var i = 0; i < product.sizes.length; i++) {
+            sizesHtml += '<button type="button" class="size-option" aria-pressed="false">' + product.sizes[i] + '</button>';
+        }
+    } else {
+        sizesHtml = '<button type="button" class="size-option" aria-pressed="false">One Size</button>';
+    }
+    document.getElementById("size-options").innerHTML = sizesHtml;
+
+    document.getElementById("size-options").addEventListener("click", function(event) {
+        var selected = event.target.closest(".size-option");
+        if (!selected) return;
+        this.querySelectorAll(".size-option").forEach(function(button) {
+            button.classList.toggle("selected", button === selected);
+            button.setAttribute("aria-pressed", button === selected ? "true" : "false");
+        });
+    });
+
+    var relatedIds = Object.keys(products).filter(function(k) { return k !== productId; });
+    // pick 3 random related products
+    relatedIds.sort(function() { return 0.5 - Math.random(); });
+    var picked = relatedIds.slice(0, 3);
+    var relatedHtml = "";
+    for (var i = 0; i < picked.length; i++) {
+        var rp = products[picked[i]];
+        relatedHtml += '<a href="product.html?id=' + picked[i] + '" class="related-card">';
+        relatedHtml += '<img src="' + rp.img + '" alt="' + rp.name + '">';
+        relatedHtml += '<h3>' + rp.name + '</h3>';
+        relatedHtml += '<p class="price">' + rp.price + '</p>';
+        relatedHtml += '</a>';
+    }
+    document.getElementById("related-grid").innerHTML = relatedHtml;
+
+    var qty = 1;
+    function changeQty(delta) {
+        qty = qty + delta;
+        if (qty < 1) qty = 1;
+        document.getElementById("qty").textContent = qty;
+    }
+</script>
+</body>
+</html>
+
